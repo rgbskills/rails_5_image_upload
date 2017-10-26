@@ -12,6 +12,21 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
 
+  # Paperclip
+  Paperclip.options[:command_path] = "/usr/local/bin/"
+
+
+  config.paperclip_defaults = {
+    :storage => :fog,
+    :fog_credentials => {
+      :provider => "AWS",
+      :aws_access_key_id => "key",
+      :aws_secret_access_key => "key",
+      :region => "eu-central-1"
+    },
+    :fog_directory => "bucket"
+  }
+
   # Enable/disable caching. By default caching is disabled.
   if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
